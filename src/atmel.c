@@ -125,7 +125,39 @@ static inline void __print_progress( atmel_buffer_info_t *info,
  * update progress value
  */
 
+static uint32_t __make_user_page_config_1p0(uint8_t pin, dfu_bool high);
+/* make a configuration word (4 bytes at address 0x808001FC) for the user page
+ * configuration settings on UC3 A0, A1, A3, B0, B1 devices (see doc7745).
+ * Default values are:
+ *      0x929E1424 for AVR UC3 A0, A1
+ *      0x929E2A9E for AVR UC3 A3
+ *      0x929E0D6B for AVR UC3 B0, B1
+ *
+ * this function is not currently used for anything, but can be used to change
+ * the bootloader configuration (pin number and high/low sets the bootloader
+ * start condition)
+ */
+
+static uint32_t __make_crc8(uint32_t cfg_word);
+/* return the ccr8 byte given some first three bytes of a configuration word
+ * this has not been implemented
+ */
+
 // ________  F U N C T I O N S  _______________________________
+static uint32_t __make_crc8(uint32_t cfg_word) {
+    return 0xFFFFFFFF;      // not valid
+}
+
+static uint32_t __make_user_page_config_1p0(uint8_t pin, dfu_bool high) {
+    uint32_t cfg_word;
+    uint32_t magic = 0x494F;
+    uint32_t crc8;
+    cfg_word = (magic<<17) + (((uint32_t) high)<<16) + (((uint32_t) pin)<<8);
+    crc8 = __make_crc8( cfg_word );
+    cfg_word += crc8;
+    return cfg_word;
+}
+
 static int32_t atmel_read_command( dfu_device_t *device,
                                    const uint8_t data0,
                                    const uint8_t data1 ) {
