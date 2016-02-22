@@ -343,8 +343,10 @@ retry:
              break;
         }
 
-        DEBUG( "%2d: 0x%04x, 0x%04x\n", (int) i,
-                descriptor.idVendor, descriptor.idProduct );
+        DEBUG( "checking %2d: 0x%04x, 0x%04x on %03d:%03d\n", (int) i,
+                descriptor.idVendor, descriptor.idProduct,
+                libusb_get_bus_number( device ),
+                libusb_get_device_address( device ) );
 
         if( (vendor  == descriptor.idVendor) &&
             (product == descriptor.idProduct) &&
