@@ -1,4 +1,7 @@
 #! /bin/sh
+# consider using autoreconf instead (it runs autoconf, autoheader, aclocal,
+# automake, libtoolize and autopoint), currently install missing error
+
 aclocal -I m4
 autoheader
 automake --foreign --add-missing --copy
