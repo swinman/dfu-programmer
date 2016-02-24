@@ -85,8 +85,10 @@ Build procedure for Windows
 ===========================
 
   Building Windows apps from source is never quite as simple ...
-  Firstly you need to have MinGW and MSys with developer tools.
-  Get them from http://sourceforge.net/projects/mingw/files/
+  Firstly you need to have MinGW and MSys2 with developer tools.
+  The standard MSys should also work but is not officially supported.
+
+  Get them from https://msys2.github.io/ or https://sourceforge.net/projects/msys2/
 
   The windows build uses the libusb-win32 library, which is a
   port of libusb 0.1. For convenience these files are included
