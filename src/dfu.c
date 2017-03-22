@@ -330,6 +330,7 @@ struct libusb_device *dfu_device_init( const uint32_t vendor,
            ((true == honor_interfaceclass) ? "true" : "false") );
 
     DEBUG( "%s(%08x, %08x)\n",__FUNCTION__, vendor, product );
+    DEBUG( "Using libusb 1.0\n");
 
 retry:
     devicecount = libusb_get_device_list( usbcontext, &list );
@@ -342,10 +343,10 @@ retry:
              DEBUG( "Failed in libusb_get_device_descriptor\n" );
              break;
         }
-
-        DEBUG( "%2d: 0x%04x, 0x%04x\n", (int) i,
-                descriptor.idVendor, descriptor.idProduct );
-
+        DEBUG( "checking %2d: 0x%04x, 0x%04x on %03d:%03d\n", (int) i,
+                descriptor.idVendor, descriptor.idProduct,
+                libusb_get_bus_number( device ),
+                libusb_get_device_address( device ) );
         if( (vendor  == descriptor.idVendor) &&
             (product == descriptor.idProduct) &&
             ((bus_number == 0)
@@ -420,6 +421,7 @@ struct usb_device *dfu_device_init( const uint32_t vendor,
     TRACE( "%s( %u, %u, %p, %s, %s )\n", __FUNCTION__, vendor, product,
            dfu_device, ((true == initial_abort) ? "true" : "false"),
            ((true == honor_interfaceclass) ? "true" : "false") );
+    DEBUG( "Using libusb 0\n");
 
 retry:
     if( 0 < retries ) {
@@ -429,6 +431,9 @@ retry:
         /* Walk the tree and find our device. */
         for( usb_bus = usb_get_busses(); NULL != usb_bus; usb_bus = usb_bus->next ) {
             for( device = usb_bus->devices; NULL != device; device = device->next) {
+                DEBUG("checking: 0x%04x, 0x%04x on %03d:%03d\n",
+                        device->descriptor.idVendor, device->descriptor.idProduct,
+                        usb_bus->location >> 24, device->devnum);
                 if(    (vendor  == device->descriptor.idVendor)
                     && (product == device->descriptor.idProduct)
                     && ((bus_number == 0)
