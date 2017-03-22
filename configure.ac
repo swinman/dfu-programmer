@@ -90,6 +90,12 @@ AS_IF([test "$enable_libusb_1_0" = "yes"],[dnl
 AS_IF([test "$have_libusb_1_0" = "no"],[dnl
   AS_IF([test "$enable_libusb_0_1" = "yes"],[dnl
     AC_MSG_NOTICE( "Checking for libusb-0.1" )
+    AS_IF([test "$has_pkg_config" = "yes"],[dnl
+      PKG_CHECK_MODULES([LIBUSB_1_0], [libusb-1.0 >= 1.0.0],
+                        [have_libusb_1_0=yes],
+                        [AC_MSG_WARN("libusb-1.0 not found")])
+    ],[dnl
+    ])
     dnl Fallback to the old libusb
     dnl libusb >= 0.1.8 is required, as we need usb_interrupt_read()
     AC_CHECK_HEADER( usb.h,
