@@ -1,0 +1,50 @@
+
+Bus 001 Device 011: ID 03eb:2ff6 Atmel Corp. 
+Device Descriptor:
+  bLength                18
+  bDescriptorType         1
+  bcdUSB               2.00
+  bDeviceClass            0 (Defined at Interface level)
+  bDeviceSubClass         0 
+  bDeviceProtocol         0 
+  bMaxPacketSize0        64
+  idVendor           0x03eb Atmel Corp.
+  idProduct          0x2ff6 
+  bcdDevice           10.00
+  iManufacturer           1 ATMEL
+  iProduct                2 AT32UC3B DFU
+  iSerial                 3 1.0.3
+  bNumConfigurations      1
+  Configuration Descriptor:
+    bLength                 9
+    bDescriptorType         2
+    wTotalLength           27
+    bNumInterfaces          1
+    bConfigurationValue     1
+    iConfiguration          0 
+    bmAttributes         0xc0
+      Self Powered
+    MaxPower              100mA
+    Interface Descriptor:
+      bLength                 9
+      bDescriptorType         4
+      bInterfaceNumber        0
+      bAlternateSetting       0
+      bNumEndpoints           0
+      bInterfaceClass       254 Application Specific Interface
+      bInterfaceSubClass      1 Device Firmware Update
+      bInterfaceProtocol      2 
+      iInterface              0 
+      Device Firmware Upgrade Interface Descriptor:
+        bLength                             9
+        bDescriptorType                    33
+        bmAttributes                       15
+          Will Detach
+          Manifestation Tolerant
+          Upload Supported
+          Download Supported
+        wDetachTimeout                      0 milliseconds
+        wTransferSize                   65535 bytes
+        bcdDFUVersion                   1.01
+Device Status:     0x0001
+  Self Powered
