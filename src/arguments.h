@@ -48,6 +48,7 @@ enum return_codes_enum {
     VALIDATION_ERROR_IN_REGION,
     VALIDATION_ERROR_OUTSIDE_REGION };
 
+/* align with target_mapping_structure in arguments.c */
 enum targets_enum { tar_at89c51snd1c,
                     tar_at89c51snd2c,
                     tar_at89c5130,
@@ -129,6 +130,7 @@ enum targets_enum { tar_at89c51snd1c,
                     tar_stm32f4_C,
                     tar_stm32f4_E,
                     tar_stm32f4_G,
+                    tar_atsamd21,
                     tar_none };
 
 enum commands_enum { com_none, com_erase, com_flash, com_user, com_eflash,

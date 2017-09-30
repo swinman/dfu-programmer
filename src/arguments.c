@@ -180,6 +180,7 @@ static struct target_mapping_structure target_map[] = {
     { "stm32f4_C",      tar_stm32f4_C,      DC_STM32,  0xdf11, 0x0483, 0x40000, 0x0000, BL_EXTRA,  512,   0,      0 },
     { "stm32f4_E",      tar_stm32f4_E,      DC_STM32,  0xdf11, 0x0483, 0x80000, 0x0000, BL_EXTRA,  512,   0,      0 },
     { "stm32f4_G",      tar_stm32f4_G,      DC_STM32,  0xdf11, 0x0483, 0x100000,0x0000, BL_EXTRA,  512,   0,      0 },
+    { "atsamd21",       tar_atsamd21,       ADC_SAMBA, 0x6124, 0x03eb, 0x100000,0x0000, BL_EXTRA,  512,   0,      0 },
     { NULL }
     // END_TARGET_LIST_LINE .. used for autocompletion script
 };
@@ -281,6 +282,7 @@ static void list_targets(int mode)
             case ADC_AVR32: dev_type_name = "AVR32"; break;
             case ADC_XMEGA: dev_type_name = "XMEGA"; break;
             case DC_STM32:  dev_type_name = "STM32F4"; break;
+            case ADC_SAMBA: dev_type_name = "Atmel SAMBA"; break;
             default:        dev_type_name = NULL;    break;
             }
             if( dev_type_name != NULL ) {
@@ -503,6 +505,10 @@ static int32_t assign_target( struct programmer_arguments *args,
                     break;
                 case DC_STM32:
                     strncpy( args->device_type_string, "STM32",
+                             DEVICE_TYPE_STRING_MAX_LENGTH );
+                    break;
+                case ADC_SAMBA:
+                    strncpy( args->device_type_string, "SAMBA",
                              DEVICE_TYPE_STRING_MAX_LENGTH );
                     break;
                 default :

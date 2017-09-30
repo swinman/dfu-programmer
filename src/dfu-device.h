@@ -18,11 +18,13 @@
 #define ADC_AVR32   (1<<2)
 #define ADC_XMEGA   (1<<3)
 #define DC_STM32    (1<<4)
+#define ADC_SAMBA   (1<<5)
 
 // Most commands fall into one of 2 groups.
 #define GRP_AVR32   (ADC_AVR32 | ADC_XMEGA)
 #define GRP_AVR     (ADC_AVR | ADC_8051)
 #define GRP_STM32   (DC_STM32)
+#define GRP_SAMBA   (ADC_SAMBA)
 
 typedef unsigned atmel_device_class_t;
 

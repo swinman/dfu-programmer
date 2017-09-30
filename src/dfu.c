@@ -616,7 +616,7 @@ static int32_t dfu_find_interface( struct libusb_device *device,
                 struct libusb_interface_descriptor setting;
 
                 setting = interface.altsetting[s];
-                DEBUG( "setting %d: class:%d, subclass %d, protocol:%d\n", s,
+                DEBUG( "checking %d: class:%d, subclass %d, protocol:%d\n", s,
                                 setting.bInterfaceClass, setting.bInterfaceSubClass,
                                 setting.bInterfaceProtocol );
 
@@ -625,13 +625,15 @@ static int32_t dfu_find_interface( struct libusb_device *device,
                     if(    (USB_CLASS_APP_SPECIFIC == setting.bInterfaceClass)
                         && (DFU_SUBCLASS == setting.bInterfaceSubClass) )
                     {
-                        DEBUG( "Found DFU Interface: %d\n", setting.bInterfaceNumber );
+                        DEBUG("Found DFU Interface (0x%X) number %d\n",
+                                DFU_SUBCLASS, setting.bInterfaceNumber);
                         return setting.bInterfaceNumber;
                     }
                 } else {
                     /* If there is a bug in the DFU firmware, return the first
                      * found interface. */
-                    DEBUG( "Found DFU Interface: %d\n", setting.bInterfaceNumber );
+                    DEBUG("Found non-DFU Interface (0x%X) Interface number %d\n",
+                            setting.bInterfaceSubClass, setting.bInterfaceNumber);
                     return setting.bInterfaceNumber;
                 }
             }

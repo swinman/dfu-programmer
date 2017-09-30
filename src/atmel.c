@@ -26,7 +26,6 @@
 #include <errno.h>
 #include <time.h>
 #include <unistd.h>
-
 #include "dfu-bool.h"
 #include "dfu-device.h"
 #include "config.h"
